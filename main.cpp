@@ -31,20 +31,27 @@ public:
 
             pos.x += sin(rad) * speed;
             pos.y += -cos(rad) * speed;
+        }
 
-            if(IsKeyDown(KEY_LEFT)){
+        if(IsKeyDown(KEY_DOWN)) {
+            rad = direction * (3.14f / 180.0f);
+
+            pos.x -= sin(rad) * speed;
+            pos.y -= -cos(rad) * speed;
+        }
+
+        if(IsKeyDown(KEY_LEFT) && (IsKeyDown(KEY_UP) || IsKeyDown(KEY_DOWN))){
                 direction -= speed_rot;
 
                 if (direction >= 360) direction -= 360;
                 if (direction < 0) direction += 360;    
 
-            } else if(IsKeyDown(KEY_RIGHT)){
+            } else if(IsKeyDown(KEY_RIGHT) && (IsKeyDown(KEY_UP) || IsKeyDown(KEY_DOWN))){
                 direction += speed_rot;
 
                 if (direction >= 360) direction -= 360;
                 if (direction < 0) direction += 360;
             }
-        }
     }
 };
 
@@ -58,9 +65,9 @@ int main(){
     car.pos.y = (screen_size_y/2) - 20;
     car.size.x = 24;
     car.size.y = 40;
-    car.speed = 5;
+    car.speed = 6;
     car.direction = 0.0;
-    car.speed_rot = 3;
+    car.speed_rot = 2;
 
     InitWindow(screen_size_x, screen_size_y, "My First game");
     SetTargetFPS(60);
